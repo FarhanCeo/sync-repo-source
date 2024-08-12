@@ -24,7 +24,7 @@ jobs:
     # Step 3: Copy all files from the "source" repo to the "target-repo"
     - name: Copy files
       run: |
-        cp -R ./* ./target-repo/
+         rsync -av --progress --exclude target-repo ./ ./target-repo/
 
     # Step 4: Commit and push the changes to the target repository
     - name: Commit and push changes
