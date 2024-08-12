@@ -14,8 +14,15 @@ jobs:
     - name: Checkout source repository
       uses: actions/checkout@v3
 
-    - name: Clone target repository
+    - name: Set up Git
       run: |
-        git clone --bare https://$GH_TOKEN@github.com/FarhanCeo/sync-repo-source.git
+        git config --global url."https://$GH_TOKEN@github.com/".insteadOf "https://github.com/"
+
+    - name: Clone the source repository as bare
+      run: |
+        git clone --bare https://github.com/FarhanCeo/sync-repo-source.git
         cd sync-repo-source.git
-        git push --mirror https://$GH_TOKEN@github.com/FarhanCeo/sync-repo-target.git
+
+    - name: Push to target repository
+      run: |
+        git push --mirror https://github.com/FarhanCeo/sync-repo-target.git
