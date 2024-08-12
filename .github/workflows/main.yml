@@ -16,6 +16,6 @@ jobs:
 
     - name: Clone target repository
       run: |
-        git clone --bare https://github.com/FarhanCeo/sync-repo-source.git
+        git clone --bare https://$GH_TOKEN@github.com/FarhanCeo/sync-repo-source.git
         cd sync-repo-source.git
         git push --mirror https://$GH_TOKEN@github.com/FarhanCeo/sync-repo-target.git
