@@ -19,7 +19,7 @@ jobs:
     # Step 2: Clone the target repository
     - name: Clone target repo
       run: |
-        git clone https://$GITHUB_ACTOR:${{ secrets.PAT }}@github.com/FarhanCeo/sync-repo-target.git target-repo
+        git clone https://$GITHUB_ACTOR:${{ secrets.PAT }}@github.com/FarhanCeo/sync-repo-source.git target-repo
 
     # Step 3: Copy the files from source to target repository
     - name: Copy files
