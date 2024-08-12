@@ -1,37 +1,21 @@
-name: Copy files to another repo
+name: Clone Repository to Another Repo
 
 on:
+  workflow_dispatch:
   push:
     branches:
-      - main
+      - main  # or any branch you want to trigger the action
 
 jobs:
-  copy-files:
+  clone_and_push:
     runs-on: ubuntu-latest
 
     steps:
-    # Step 1: Checkout the "source" repository (current repo)
-    - name: Checkout source repo
+    - name: Checkout source repository
       uses: actions/checkout@v3
-      with:
-        fetch-depth: 1
 
-    # Step 2: Clone the target repository
-    - name: Clone target repo
+    - name: Clone target repository
       run: |
-        git clone https://$GITHUB_ACTOR:${{ secrets.PAT }}@github.com/FarhanCeo/sync-repo-target.git target-repo
-
-    # Step 3: Copy all files from the "source" repo to the "target-repo"
-    - name: Copy files
-      run: |
-         rsync -av --progress --exclude target-repo ./ ./target-repo/
-
-    # Step 4: Commit and push the changes to the target repository
-    - name: Commit and push changes
-      run: |
-        cd target-repo
-        git config user.name "GitHub Actions"
-        git config user.email "actions@github.com"
-        git add .
-        git commit -m "Copy files from source repo"
-        git push origin main
+        git clone --bare https://github.com/FarhanCeo/sync-repo-source.git
+        cd sync-repo-source.git
+        git push --mirror https://$GH_TOKEN@github.com/FarhanCeo/sync-repo-target.git
