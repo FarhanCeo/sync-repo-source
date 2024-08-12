@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    # Step 1: Checkout the source repository (current repo)
+    # Step 1: Checkout the "source" repository (current repo)
     - name: Checkout source repo
       uses: actions/checkout@v3
       with:
@@ -19,9 +19,9 @@ jobs:
     # Step 2: Clone the target repository
     - name: Clone target repo
       run: |
-        git clone https://$GITHUB_ACTOR:${{ secrets.PAT }}@github.com/FarhanCeo/sync-repo-source.git target-repo
+        git clone https://$GITHUB_ACTOR:${{ secrets.PAT }}@github.com/FarhanCeo/sync-repo-target.git target-repo
 
-    # Step 3: Copy the files from source to target repository
+    # Step 3: Copy all files from the "source" repo to the "target-repo"
     - name: Copy files
       run: |
         cp -R ./* ./target-repo/
