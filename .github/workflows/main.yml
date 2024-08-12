@@ -25,4 +25,4 @@ jobs:
 
     - name: Push to target repository
       run: |
-        git push --mirror https://github.com/FarhanCeo/sync-repo-target.git
+        git push --mirror https://$GH_TOKEN@github.com/FarhanCeo/sync-repo-target.git
